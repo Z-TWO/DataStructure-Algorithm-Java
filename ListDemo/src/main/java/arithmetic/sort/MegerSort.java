@@ -16,16 +16,16 @@ public class MegerSort {
 
     private static <E extends Comparable<E>> void sort(E[] arr, int left, int rigth) {
         if(left>=rigth) return;
-        int midle = (left + rigth) / 2;
+        int middle = (left + rigth) / 2;
         //左边排序
-        sort(arr, left, midle);
+        sort(arr, left, middle);
         //右边排序
-        sort(arr, midle + 1, rigth);
+        sort(arr, middle + 1, rigth);
         //合并左右两边
-        mergic(arr, left, midle, rigth);
+        merge(arr, left, middle, rigth);
     }
 
-    private static <E extends Comparable<E>> void mergic(E[] arr, int left, int mid, int right) {
+    private static <E extends Comparable<E>> void merge(E[] arr, int left, int mid, int right) {
         //复制arr
         E[] temp = Arrays.copyOfRange(arr, left, right + 1);
         //左下标和右下标
@@ -34,8 +34,10 @@ public class MegerSort {
         for (int k = left; k <= right; k++) {
             if (i > mid) {
                 arr[k] = temp[j - left];
+                j++;
             } else if (j > right) {
                 arr[k] = temp[i - left];
+                i++;
             } else if (temp[i-left].compareTo(temp[j-left]) < 0) {
                 arr[k] = temp[i - left];
                 i++;
