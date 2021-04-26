@@ -22,7 +22,9 @@ public class MegerSort {
         //右边排序
         sort(arr, middle + 1, rigth);
         //合并左右两边
-        merge(arr, left, middle, rigth);
+        if (arr[middle].compareTo(arr[middle + 1]) > 0) {
+            merge(arr, left, middle, rigth);
+        }
     }
 
     private static <E extends Comparable<E>> void merge(E[] arr, int left, int mid, int right) {

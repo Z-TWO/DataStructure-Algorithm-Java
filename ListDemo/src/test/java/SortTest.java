@@ -12,10 +12,6 @@ import java.util.Arrays;
 public class SortTest {
     @Test
     public void MegerSorrTest() {
-        Integer[] arr1 = ArrayGenerator.generateRandomArray(100000);
-        SortHelp.sortTime("InsertSort", arr1);
-        Integer[] arr2 = ArrayGenerator.generateRandomArray(100000);
-        SortHelp.sortTime("SelectSort", arr2);
         Integer[] arr3 = ArrayGenerator.generateRandomArray(100000);
         SortHelp.sortTime("MegerSort", arr3);
     }
