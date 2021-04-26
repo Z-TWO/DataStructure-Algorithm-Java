@@ -30,6 +30,10 @@ public class MegerSort {
     private static <E extends Comparable<E>> void merge(E[] arr, int left, int mid, int right) {
         //复制arr
         E[] temp = Arrays.copyOfRange(arr, left, right + 1);
+        if (right - left < 15) {
+            InsertSort.sort(arr, left, right+1);
+            return;
+        }
         //左下标和右下标
         int i = left, j = mid + 1;
         //开始排序
