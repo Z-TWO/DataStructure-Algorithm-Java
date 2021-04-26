@@ -8,6 +8,7 @@ import java.util.Random;
  * @Date 2021/4/17 22:49
  */
 public class ArrayGenerator {
+
     public static Integer[] generateOrderArray(int n) {
         Integer[] arr = new Integer[n];
         for (int i = 0; i < n; i++) {

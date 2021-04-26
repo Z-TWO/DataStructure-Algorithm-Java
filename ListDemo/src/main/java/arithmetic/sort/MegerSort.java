@@ -11,25 +11,25 @@ public class MegerSort {
     private MegerSort(){}
 
     public static <E extends Comparable<E>> void sort(E[] arr) {
-        sort(arr, 0, arr.length - 1);
+        E[] temp = Arrays.copyOf(arr, arr.length);
+        sort(arr, 0, arr.length - 1, temp);
     }
 
-    private static <E extends Comparable<E>> void sort(E[] arr, int left, int rigth) {
+    private static <E extends Comparable<E>> void sort(E[] arr, int left, int rigth,E[] temp) {
         if(left>=rigth) return;
         int middle = (left + rigth) / 2;
         //左边排序
-        sort(arr, left, middle);
+        sort(arr, left, middle, temp);
         //右边排序
-        sort(arr, middle + 1, rigth);
+        sort(arr, middle + 1, rigth, temp);
         //合并左右两边
         if (arr[middle].compareTo(arr[middle + 1]) > 0) {
-            merge(arr, left, middle, rigth);
+            merge(arr, left, middle, rigth, temp);
         }
     }
 
-    private static <E extends Comparable<E>> void merge(E[] arr, int left, int mid, int right) {
-        //复制arr
-        E[] temp = Arrays.copyOfRange(arr, left, right + 1);
+    private static <E extends Comparable<E>> void merge(E[] arr, int left, int mid, int right,E[] temp) {
+        System.arraycopy(arr, left, temp, left, right - left + 1);
         if (right - left < 15) {
             InsertSort.sort(arr, left, right+1);
             return;
@@ -39,16 +39,16 @@ public class MegerSort {
         //开始排序
         for (int k = left; k <= right; k++) {
             if (i > mid) {
-                arr[k] = temp[j - left];
+                arr[k] = temp[j];
                 j++;
             } else if (j > right) {
-                arr[k] = temp[i - left];
+                arr[k] = temp[i];
                 i++;
-            } else if (temp[i-left].compareTo(temp[j-left]) < 0) {
-                arr[k] = temp[i - left];
+            } else if (temp[i].compareTo(temp[j]) < 0) {
+                arr[k] = temp[i];
                 i++;
             } else {
-                arr[k] = temp[j - left];
+                arr[k] = temp[j];
                 j++;
             }
         }
