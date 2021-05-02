@@ -2,6 +2,7 @@ package Utils;
 
 import arithmetic.sort.InsertSort;
 import arithmetic.sort.MegerSort;
+import arithmetic.sort.QuerySort;
 import arithmetic.sort.SelectSort;
 
 /**
@@ -33,6 +34,8 @@ public class SortHelp {
             case "SelectSort":
                 SelectSort.sort(arr);
                 break;
+            case "QuerySort":
+                QuerySort.sort(arr);
             default:
                 break;
         }
