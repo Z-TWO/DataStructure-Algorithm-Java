@@ -8,30 +8,47 @@ import java.util.Arrays;
  * @Date 2021/4/17 22:17
  */
 public class MegerSort {
-    private MegerSort(){}
+    private MegerSort() {
+    }
 
     public static <E extends Comparable<E>> void sort(E[] arr) {
         E[] temp = Arrays.copyOf(arr, arr.length);
-        sort(arr, 0, arr.length - 1, temp);
+        sortDU(arr, 0, arr.length - 1, temp);
+//        sortUD(arr);
     }
 
-    private static <E extends Comparable<E>> void sort(E[] arr, int left, int rigth,E[] temp) {
-        if(left>=rigth) return;
+    //自顶向下
+    private static <E extends Comparable<E>> void sortDU(E[] arr, int left, int rigth, E[] temp) {
+        if (left >= rigth) return;
         int middle = (left + rigth) / 2;
         //左边排序
-        sort(arr, left, middle, temp);
+        sortDU(arr, left, middle, temp);
         //右边排序
-        sort(arr, middle + 1, rigth, temp);
+        sortDU(arr, middle + 1, rigth, temp);
         //合并左右两边
         if (arr[middle].compareTo(arr[middle + 1]) > 0) {
             merge(arr, left, middle, rigth, temp);
         }
     }
 
-    private static <E extends Comparable<E>> void merge(E[] arr, int left, int mid, int right,E[] temp) {
+    //自顶向上
+    private static <E extends Comparable<E>> void sortUD(E[] arr) {
+        E[] temp = Arrays.copyOf(arr, arr.length);
+        int n = arr.length;
+        //需要归并范围[i,i+size-1][i+size,size+size+i-1]
+        for (int size = 1; size < n; size += size) {
+            for (int i = 0; i + size < n; i += size + size) {
+                if (temp[size - 1].compareTo(temp[i + size]) > 0) {
+                    merge(arr, i, i + size - 1, Math.min(size + size + i - 1, n - 1), temp);
+                }
+            }
+        }
+    }
+
+    private static <E extends Comparable<E>> void merge(E[] arr, int left, int mid, int right, E[] temp) {
         System.arraycopy(arr, left, temp, left, right - left + 1);
         if (right - left < 15) {
-            InsertSort.sort(arr, left, right+1);
+            InsertSort.sort(arr, left, right + 1);
             return;
         }
         //左下标和右下标
