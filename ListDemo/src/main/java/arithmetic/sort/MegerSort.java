@@ -20,7 +20,7 @@ public class MegerSort {
     //自顶向下
     private static <E extends Comparable<E>> void sortDU(E[] arr, int left, int rigth, E[] temp) {
         if (left >= rigth) return;
-        int middle = (left + rigth) / 2;
+        int middle = left + (rigth - left) / 2;
         //左边排序
         sortDU(arr, left, middle, temp);
         //右边排序
@@ -38,7 +38,7 @@ public class MegerSort {
         //需要归并范围[i,i+size-1][i+size,size+size+i-1]
         for (int size = 1; size < n; size += size) {
             for (int i = 0; i + size < n; i += size + size) {
-                if (temp[size - 1].compareTo(temp[i + size]) > 0) {
+                if (arr[i + size - 1].compareTo(arr[i + size]) > 0) {
                     merge(arr, i, i + size - 1, Math.min(size + size + i - 1, n - 1), temp);
                 }
             }
@@ -47,10 +47,6 @@ public class MegerSort {
 
     private static <E extends Comparable<E>> void merge(E[] arr, int left, int mid, int right, E[] temp) {
         System.arraycopy(arr, left, temp, left, right - left + 1);
-        if (right - left < 15) {
-            InsertSort.sort(arr, left, right + 1);
-            return;
-        }
         //左下标和右下标
         int i = left, j = mid + 1;
         //开始排序

@@ -13,9 +13,8 @@ import java.util.Arrays;
 public class SortTest {
     @Test
     public void MegerSorrTest() {
-        Integer[] arr = ArrayGenerator.generateRandomArray(10);
-        System.out.println(Arrays.toString(arr));
-        MegerSort.sort(arr);
-        System.out.println(Arrays.toString(arr));
+        Integer[] arr = ArrayGenerator.generateRandomArray(10000);
+        SortHelp.sortTime("MegerSort", arr);
+
     }
 }
