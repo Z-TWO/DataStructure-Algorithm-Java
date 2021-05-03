@@ -15,9 +15,7 @@ import java.util.Arrays;
 public class SortTest {
     @Test
     public void MegerSorrTest() {
-        Integer[] arr = ArrayGenerator.generateRandomArray(20);
-        System.out.println(Arrays.toString(arr));
-        InsertSort.sort(arr, 0, arr.length);
-        System.out.println(Arrays.toString(arr));
+        Integer[] arr = ArrayGenerator.generateOrderArray(10000);
+        SortHelp.sortTime("QuerySort", arr);
     }
 }
